@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 02:35:25 by ming              #+#    #+#             */
-/*   Updated: 2026/04/07 02:38:46 by ming             ###   ########.fr       */
+/*   Updated: 2026/04/07 05:26:43 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	julia(int x, int y, t_fractol *f)
 
 	i = 0;
 	z.r = scale(x, 800, f->min_r, f->max_r);
-	z.j = scale(y, 800, f->max_j, f->min_r);
+	z.j = scale(y, 800, f->max_j, f->min_j);
 	c.r = f->julia_r;
 	c.j = f->julia_j;
 	while ((i < f->max) && ((z.r * z.r) + (z.j * z.j) < 4.0))

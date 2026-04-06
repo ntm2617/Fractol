@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 18:30:24 by ming              #+#    #+#             */
-/*   Updated: 2026/04/07 02:45:24 by ming             ###   ########.fr       */
+/*   Updated: 2026/04/07 05:26:09 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	mandelbrot(int x, int y, t_fractol *f)
 	z.r = 0.0;
 	z.j = 0.0;
 	c.r = scale(x, 800, f->min_r, f->max_r);
-	c.j = scale(y, 800, f->max_j, f->min_r);
+	c.j = scale(y, 800, f->max_j, f->min_j);
 	while ((i < f->max) && ((z.r * z.r) + (z.j * z.j) < 4.0))
 	{
 		old_r = z.r;
