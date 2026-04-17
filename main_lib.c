@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 02:49:08 by ming              #+#    #+#             */
-/*   Updated: 2026/04/07 03:41:10 by ming             ###   ########.fr       */
+/*   Updated: 2026/04/14 16:11:49 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	check_dot(const char *str)
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
+	if (str[i] == '\0')
+		return (-1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '.')
@@ -69,10 +71,10 @@ double	ft_atof(const char *str)
 		n = (n * 10) + (str[i++] - '0');
 	if (str[i] == '.')
 		i++;
-	j = 1.0;
+	j = 10.0;
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
-		n = n + ((str[i++] - '0') / (10 * j));
+		n = n + ((str[i++] - '0') / j);
 		j = j * 10.0;
 	}
 	return (neg * n);

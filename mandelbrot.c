@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 18:30:24 by ming              #+#    #+#             */
-/*   Updated: 2026/04/07 05:26:09 by ming             ###   ########.fr       */
+/*   Updated: 2026/04/15 15:38:41 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	get_color(int r, int g, int b)
 
 void	range_color(int i, t_fractol *f, int x, int y)
 {
-	int	r;
-	int	g;
-	int	b;
+	int		r;
+	int		g;
+	int		b;
+	double	t;
 
-	r = (i * 2) % 256;
-	g = (i * 8) % 256;
-	b = (i * 15) % 256;
+	t = (double)i / (double)f->max * 6.28;
+	r = (int)(128.0 + 127.0 * sin(t + 0.0));
+	g = (int)(128.0 + 127.0 * sin(t + 2.1));
+	b = (int)(128.0 + 127.0 * sin(t + 4.2));
 	mlx_pix_put(f, x, y, get_color(r, g, b));
 }
 

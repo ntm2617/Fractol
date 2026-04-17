@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:38:16 by ming              #+#    #+#             */
-/*   Updated: 2026/04/07 02:33:55 by ming             ###   ########.fr       */
+/*   Updated: 2026/04/15 15:07:36 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,36 @@ int	key_press(int press, t_fractol *f)
 	else
 		for_move(press, f);
 	render_fractol(f);
+	return (0);
+}
+
+int	fail_wind(t_fractol *f)
+{
+	void	*wind;
+
+	wind = mlx_new_window(f->mlx_p, 800, 800, "Fract-ol");
+	if (wind == NULL)
+	{
+		mlx_destroy_display(f->mlx_p);
+		free(f->mlx_p);
+		return (1);
+	}
+	f->wind_p = wind;
+	return (0);
+}
+
+int	fail_img(t_fractol *f)
+{
+	void	*img;
+
+	img = mlx_new_image(f->mlx_p, 800, 800);
+	if (img == NULL)
+	{
+		mlx_destroy_window(f->mlx_p, f->wind_p);
+		mlx_destroy_display(f->mlx_p);
+		free(f->mlx_p);
+		return (1);
+	}
+	f->img_p = img;
 	return (0);
 }

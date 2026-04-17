@@ -6,42 +6,11 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 00:25:41 by ming              #+#    #+#             */
-/*   Updated: 2026/04/07 03:41:10 by ming             ###   ########.fr       */
+/*   Updated: 2026/04/15 15:58:46 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-int	fail_wind(t_fractol *f)
-{
-	void	*wind;
-
-	wind = mlx_new_window(f->mlx_p, 800, 800, "Fract-ol");
-	if (wind == NULL)
-	{
-		mlx_destroy_display(f->mlx_p);
-		free(f->mlx_p);
-		return (1);
-	}
-	f->wind_p = wind;
-	return (0);
-}
-
-int	fail_img(t_fractol *f)
-{
-	void	*img;
-
-	img = mlx_new_image(f->mlx_p, 800, 800);
-	if (img == NULL)
-	{
-		mlx_destroy_window(f->mlx_p, f->wind_p);
-		mlx_destroy_display(f->mlx_p);
-		free(f->mlx_p);
-		return (1);
-	}
-	f->img_p = img;
-	return (0);
-}
 
 void	main_init2(t_fractol *f)
 {
@@ -79,6 +48,24 @@ int	main_init(t_fractol *f)
 	return (0);
 }
 
+static int	main_julia(t_fractol *f, char **av)
+{
+	f->type = 2;
+	if (check_dot(av[2]) == -1 || check_dot(av[3]) == -1)
+	{
+		write(1, "Error: Invalid Julia parameters. Use numbers", 44);
+		write(1, " (e.g., -0.8)\n", 14);
+		return (1);
+	}
+	f->julia_r = ft_atof(av[2]);
+	f->julia_j = ft_atof(av[3]);
+	if (main_init(f) == 1)
+		return (1);
+	render_fractol(f);
+	mlx_loop(f->mlx_p);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_fractol	f;
@@ -92,20 +79,7 @@ int	main(int ac, char **av)
 		mlx_loop(f.mlx_p);
 	}
 	else if (ac == 4 && ft_strncmp(av[1], "julia", 6) == 0)
-	{
-		f.type = 2;
-		if (check_dot(av[2]) != 1 || check_dot(av[3]) != 1)
-		{
-			write(1, "Error: Invalid Julia parameters. Use decimals (e.g., -0.8)\n", 59);
-			return (1);
-		}
-		f.julia_r = ft_atof(av[2]);
-		f.julia_j = ft_atof(av[3]);
-		if (main_init(&f) == 1)
-			return (1);
-		render_fractol(&f);
-		mlx_loop(f.mlx_p);
-	}
+		return (main_julia(&f, av));
 	else
 	{
 		write(1, "Please type: './fractol mandelbrot'\n", 36);

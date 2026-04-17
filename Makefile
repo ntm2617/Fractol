@@ -11,7 +11,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
 CC = cc
 
-FLAG = -Wall -Wextra -Werror -o3
+FLAG = -Wall -Wextra -Werror
 
 all: $(NAME)
 
