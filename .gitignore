@@ -1,0 +1,7 @@
+# Ignore MinilibX compiled libraries
+minilibx-linux/*.o
+minilibx-linux/*.a
+
+# Ignore Fract-ol object files and executable
+*.o
+fractol
